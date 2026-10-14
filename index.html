@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10131b">
+  <meta name="description" content="BestBuy: compara productos y marcas para construir rankings de preferencias mediante Elo.">
+  <title>BestBuy — Ranking de productos y marcas</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="wrap header">
+    <div class="brand-icon" aria-hidden="true">B</div>
+    <div>
+      <h1>BestBuy</h1>
+      <p class="subtitle">Compara productos. Descubre preferencias. Explora oportunidades.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <span class="eyebrow">RECOMENDACIÓN A/B + ELO</span>
+      <h2>¿Cuál elegirías?</h2>
+      <p>
+        Compara dos alternativas según tu perfil y tu intención de compra.
+        Cada voto actualiza el ranking.
+      </p>
+    </section>
+
+    <div class="layout">
+      <aside class="card settings">
+        <h2>1. Configura</h2>
+
+        <label for="segmentSelect">Perfil del comprador</label>
+        <select id="segmentSelect"></select>
+
+        <label for="contextSelect">Criterio de decisión</label>
+        <select id="contextSelect"></select>
+
+        <label for="categorySelect">Categoría de productos</label>
+        <select id="categorySelect"></select>
+
+        <button id="btnNewPair" class="button secondary" type="button">
+          ↻ Nuevo enfrentamiento
+        </button>
+
+        <p class="hint">
+          Cambiar el perfil o el contexto cambia el ranking consultado.
+        </p>
+
+        <div class="notice">
+          <strong>¿Cómo se recomienda?</strong>
+          <p>
+            Las elecciones humanas actualizan una puntuación Elo.
+            El sistema no verifica calidad ni ventas reales.
+          </p>
+        </div>
+      </aside>
+
+      <section class="card comparison">
+        <div class="section-heading">
+          <div>
+            <span class="step">PASO 2</span>
+            <h2>Elige tu favorito</h2>
+          </div>
+          <span class="live-label">COMPARACIÓN A/B</span>
+        </div>
+
+        <p id="question" class="question" aria-live="polite">Cargando pregunta...</p>
+
+        <div class="duel">
+          <button id="btnA" class="product pick" type="button">
+            <span class="option-label">OPCIÓN A</span>
+            <span id="labelA" class="product-name">Cargando...</span>
+            <span id="detailA" class="product-detail"></span>
+            <span class="choose">Elegir este producto →</span>
+          </button>
+
+          <button id="btnB" class="product pick" type="button">
+            <span class="option-label">OPCIÓN B</span>
+            <span id="labelB" class="product-name">Cargando...</span>
+            <span id="detailB" class="product-detail"></span>
+            <span class="choose">Elegir este producto →</span>
+          </button>
+        </div>
+
+        <p id="feedback" class="feedback" role="status" aria-live="polite">
+          Selecciona el producto que prefieras.
+        </p>
+
+        <div class="stats">
+          <div>
+            <span>Votos registrados</span>
+            <strong id="voteCount">0</strong>
+          </div>
+          <div>
+            <span>Perfil activo</span>
+            <strong id="activeProfile">—</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="card ranking">
+        <div class="section-heading">
+          <div>
+            <span class="step">PASO 3</span>
+            <h2>Ranking Top 10</h2>
+          </div>
+        </div>
+
+        <p class="hint">
+          Ordenado por puntuación Elo en el perfil, contexto y categoría seleccionados.
+        </p>
+
+        <div class="ranking-legend">
+          <span>Posición y producto</span>
+          <span>Puntuación</span>
+        </div>
+
+        <div id="topBox" class="topbox" aria-live="polite"></div>
+
+        <p id="rankingNote" class="hint">
+          Las puntuaciones iniciales son iguales.
+        </p>
+
+        <button id="btnExport" class="button secondary" type="button">
+          ↓ Exportar votos CSV
+        </button>
+
+        <button id="btnReset" class="button danger" type="button">
+          Reiniciar datos locales
+        </button>
+      </section>
+    </div>
+
+    <section class="card methodology">
+      <h2>¿Qué nos dice este ranking?</h2>
+      <div class="method-grid">
+        <div>
+          <h3>Preferencias</h3>
+          <p>Qué alternativas reciben más elecciones en comparaciones sucesivas.</p>
+        </div>
+        <div>
+          <h3>Segmentación</h3>
+          <p>Cómo cambian las preferencias según el perfil y el contexto.</p>
+        </div>
+        <div>
+          <h3>Monetización</h3>
+          <p>Una señal para investigar campañas, recomendaciones y oportunidades comerciales.</p>
+        </div>
+      </div>
+      <p class="disclaimer">
+        Proyecto educativo. Los productos, precios y datos de ejemplo no representan
+        ofertas verificadas. Las preferencias registradas no equivalen a ventas ni ingresos.
+      </p>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    BestBuy · Proyecto educativo basado en comparación A/B y ranking Elo.
+  </footer>
+</body>
+</html>
