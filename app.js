@@ -170,6 +170,10 @@ const categorias = {
 
 const RATING_INICIAL = 1000;
 const K = 32;
+// Diseño propio: la intensidad del ajuste cambia según el perfil.
+// Ahorro: cambios más suaves (preferencias más estables).
+// Prestaciones: cambios más fuertes (decisiones más marcadas).
+const K_POR_PERFIL = { general: 32, ahorro: 24, premium: 40 };
 const STORAGE_KEY = "bestbuy_state_v1";
 
 function bucketKey(segmento, contexto, categoria) {
@@ -243,7 +247,7 @@ function expectedScore(ra, rb) {
   return 1 / (1 + Math.pow(10, (rb - ra) / 400));
 }
 
-function updateElo(bucket, idA, idB, winner) {
+function updateElo(bucket, idA, idB, winner, k = K) {
   const ra = bucket[idA];
   const rb = bucket[idB];
 
@@ -253,8 +257,8 @@ function updateElo(bucket, idA, idB, winner) {
   const sa = winner === "A" ? 1 : 0;
   const sb = winner === "B" ? 1 : 0;
 
-  bucket[idA] = ra + K * (sa - ea);
-  bucket[idB] = rb + K * (sb - eb);
+  bucket[idA] = ra + k * (sa - ea);
+  bucket[idB] = rb + k * (sb - eb);
 }
 
 // =============================================
@@ -474,7 +478,13 @@ function vote(winner) {
 
   if (!bucket) return;
 
-  updateElo(bucket, currentA.id, currentB.id, winner);
+  updateElo(
+    bucket,
+    currentA.id,
+    currentB.id,
+    winner,
+    K_POR_PERFIL[segmentSelect.value] ?? K
+  );
 
   const ganador = winner === "A" ? currentA : currentB;
   const perdedor = winner === "A" ? currentB : currentA;
